@@ -1,54 +1,34 @@
-# React + TypeScript + Vite
+# 🚀 Projeto React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido com o objetivo de praticar conceitos modernos do React, como **Context API**, **componentização** e **boas práticas de gerenciamento de estado**.
 
-Currently, two official plugins are available:
+## 🛠️ Tecnologias e Ferramentas Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **[React](https://reactjs.org/)** — Biblioteca principal para construção da interface.
+- **[TypeScript](https://www.typescriptlang.org/)** — Superset de JavaScript com tipagem estática.
+- **[Vite](https://vitejs.dev/)** — Ferramenta de build ultrarrápida para front-end moderno.
+- **[Styled Components](https://styled-components.com/)** — Estilização com CSS-in-JS.
+- **[React Router DOM](https://reactrouter.com/)** — Gerenciamento de rotas da aplicação.
+- **[React Hook Form](https://react-hook-form.com/)** — Biblioteca leve para manipulação de formulários.
+- **[Zod](https://zod.dev/)** — Validação e tipagem de dados.
+- **[@hookform/resolvers](https://react-hook-form.com/get-started#SchemaValidation)** — Integração entre `React Hook Form` e bibliotecas de validação como `Zod`.
+- **[Context API + useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)** — Para gerenciamento global de estado.
+- **[Immer](https://immerjs.github.io/immer/)** — Imutabilidade mais simples ao trabalhar com estados complexos.
+- **`localStorage`** — Persistência dos dados no navegador.
 
-## Expanding the ESLint configuration
+## 📁 Estrutura do Projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A estrutura do projeto foi pensada para ser clara e escalável, utilizando:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Separação de componentes e estilos
+- Contextos organizados em uma pasta dedicada
+- Reaproveitamento de lógica com hooks e reducers
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📦 Instalação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Instale as dependências
+npm install
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+# Rode o projeto
+npm run dev
