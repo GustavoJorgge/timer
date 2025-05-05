@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useState, useReducer } from "react";
+import { createContext, ReactNode, useState, useReducer, useEffect } from "react";
 import { Cycle, cyclesReducer } from "../reducers/cycles/reducer";
 import { ActionTypes, addNewCycleAction, interruptedCycleAction, markCurrentCycleAsFinishedAction } from "../reducers/cycles/actions";
+import { differenceInSeconds } from 'date-fns';
 
 
 
@@ -34,19 +35,48 @@ export function CyclesContextProvider({
     children,
 }: CyclesContextProviderProps) {
     const [cyclesState, dispatch] = useReducer(cyclesReducer, {
+        // Estado inicial padrão, caso não haja dados no localStorage
         cycles: [],
         activeCycleId: null
-    }
+    },
+        // Função de inicialização que será chamada apenas uma vez ao montar o componente
+        (initialState) => {
+            // Tenta buscar um estado previamente salvo no localStorage
+            const storedStateAsJSON = localStorage.getItem('@timer: cycles-state-1.0.0');
+
+            // Se houver dados salvos, retorna o estado recuperado
+            if (storedStateAsJSON) {
+                return JSON.parse(storedStateAsJSON);
+            }
+
+            return initialState
+        }
     )
 
 
-    // const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
-    const [amountSecondsPassed, setAmountSecondsPassed] = useState(0) // essa variavel armazena o tanto de segundos que ja se passaram desde que iniciou o ciclo
+    useEffect(() => {
+        const stateJSON = JSON.stringify(cyclesState)
+        // Salva o estado no localStorage para persistência dos dados
+        localStorage.setItem('@timer: cycles-state-1.0.0', stateJSON)
+    }, [cyclesState])
 
     const { cycles, activeCycleId } = cyclesState;
-
-
     const activeCycle = cycles.find((cycle) => cycle.id == activeCycleId)
+
+    // const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+    const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
+        if (activeCycle) {
+            return differenceInSeconds(
+                new Date(),
+                new Date(activeCycle.startDate),
+            )
+        }
+
+        return 0
+    }) // essa variavel armazena o tanto de segundos que ja se passaram desde que iniciou o ciclo
+
+
+
 
     function setSecondsPassed(seconds: number) {
         setAmountSecondsPassed(seconds)
